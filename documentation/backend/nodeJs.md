@@ -14,8 +14,8 @@
       - Http.serverResponse, IncomingMsg 
       - They can be used to set and read headers and other familiar operations
 
-
-Async Behavior 
+___
+### Async Behavior 
 Recommended Function patterns 
 * Initiator
   * Takes input from sources and calls functions on it
@@ -34,8 +34,44 @@ Blocking vs NonBlocking Code
 - Blocking 
   - No other execution takes place during that time
 
+___
+Paths 
+``` require("path") ```
+Helpful in resolving the path only. Does not ensure if the path exist or not.
+* Resolve to get absolute path.
+  
+___
+File reading Writing 
+* Using "fs"
+  * Has sync alternative or fs/promise for promise based utility
+* This reads complete file into memory 
+  * This can have memory implications. We should try streams for large files
 
+```javascript
+const fs = require('fs/promises')
+async function example() {
+  try {
+    const data = await fs.readFile('/Users/joe/test.txt', { encoding: 'utf8' });
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+}
+example();
+```
+____
 
+### Node Cli 
+* ```node app.js```
+* ```nodemon app.js``` a dependency for watching live changes 
+* ```userId=123 node app.js``` is available with `process.env.userId`
+* We generally user .env file in combination with `require('dotenv').config();`
+  
+
+### Command line args
+
+* Using readLine module 
+____
 State Management
 * In Memory 
 * I/O
@@ -59,6 +95,16 @@ ___
   - Should not fail build if unable to install it
   - 
 
+### Exports
+
+```javascript 
+module.exports = app 
+// single variable exported from a file
+
+
+exports.app = app 
+// multiple value exported from a file
+```
 
 ### Common js
 ```  javascript
